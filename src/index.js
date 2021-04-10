@@ -1,1 +1,3 @@
-console.log("test")
+import { yep } from "./stitch.js"
+
+console.log(yep)
