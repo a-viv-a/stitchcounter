@@ -1,11 +1,17 @@
 body {
     background-color: rgb(51, 51, 51);
     font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 #countBlock {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
 }
 
 #countButtons {
