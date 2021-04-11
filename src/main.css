@@ -14,14 +14,14 @@ body {
     flex-grow: 1;
 }
 
-#rowBlock {
-    flex-grow: 1;
-}
-
-#countBlock, #countButtons {
+#countBlock, #countButtons, #rowBlock {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+}
+
+#countBlock {
+    flex-grow: 2;
 }
 
 #countLower {
@@ -118,6 +118,41 @@ button.incSelect:active:enabled {
 button.incSelect:disabled {
     color: rgb(0, 0, 102);
     background-color: rgb(51, 51, 153);
+}
+
+#tableBlock {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    flex: 1 1 1px;
+}
+
+table {
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    overflow-y: auto;
+}
+
+table, th, td, caption {
+    font-size: 1.5rem;
+    border: .3rem solid rgb(0, 0, 0);
+    color: white;
+    background-color: rgb(51, 0, 51);
+}
+
+th, td {
+    padding: .5rem 0rem;
+}
+
+caption {
+    border-bottom: none;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .noselect {
