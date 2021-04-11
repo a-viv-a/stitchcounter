@@ -38,7 +38,7 @@ body {
 }
 
 #countNumber {
-    font-size: 8em;
+    font-size: 8rem;
 }
 
 button.counter, button.incSelect {
@@ -48,10 +48,9 @@ button.counter, button.incSelect {
 button {
     border: none;
     color: white;
-    padding: 16px 32px;
     text-align: center;
     text-decoration: none;
-    font-size: 5em;
+    font-size: 5rem;
     transition-timing-function: cubic-bezier(.22, .75, .29, .82);
     transition-duration: 1.5s;
 }
@@ -96,6 +95,7 @@ button.red:active:enabled {
 }
 
 button.incSelect {
+    padding: 1rem 0rem;
     color: rgb(102, 102, 0);
     background-color: rgb(153, 153, 51);
 }
