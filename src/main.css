@@ -27,6 +27,10 @@ body {
     font-size: 8em;
 }
 
+button.counter {
+    flex-grow: 1;
+}
+
 button {
     border: none;
     color: white;
@@ -48,26 +52,32 @@ button:active {
 }
 
 button.green {
+    color: rgb(0, 102, 0);
     background-color: rgb(51, 153, 51);
 }
 
 button.green:hover:enabled {
+    color: rgb(0, 102, 51);
     background-color: rgb(51, 153, 102);
 }
 
 button.green:active:enabled {
+    color: rgb(0, 102, 0);
     background-color: rgb(0, 51, 0);
 }
 
 button.red {
+    color: rgb(102, 0, 0);
     background-color: rgb(153, 51, 51);
 }
 
 button.red:hover:enabled {
+    color: rgb(102, 0, 51);
     background-color: rgb(153, 51, 102);
 }
 
 button.red:active:enabled {
+    color: rgb(102, 0, 0);
     background-color: rgb(51, 0, 0);
 }
 
