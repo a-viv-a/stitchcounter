@@ -121,8 +121,10 @@ button.incSelect:disabled {
 }
 
 #tableBlock {
+    color-scheme: dark;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
     flex: 1 1 1px;
 }
 
@@ -141,11 +143,16 @@ table, th, td, caption {
     background-color: rgb(51, 0, 51);
 }
 
-th, td {
+th, td, caption {
     padding: .5rem 0rem;
 }
 
+td {
+    scroll-snap-align: start;
+}
+
 caption {
+    scroll-snap-align: start;
     border-bottom: none;
 }
 
