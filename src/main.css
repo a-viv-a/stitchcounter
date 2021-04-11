@@ -8,6 +8,16 @@ body {
     padding: 0;
 }
 
+#mainBlock {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+#rowBlock {
+    flex-grow: 1;
+}
+
 #countBlock {
     display: flex;
     flex-direction: row;
