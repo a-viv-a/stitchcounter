@@ -20,6 +20,10 @@ body {
     flex-grow: 1;
 }
 
+#rowBlock {
+    background-color: rgb(51, 0, 51)
+}
+
 #countBlock {
     flex-grow: 2;
 }
