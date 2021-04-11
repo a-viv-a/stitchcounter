@@ -20,8 +20,19 @@ body {
 
 #countBlock {
     display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+#countUpper {
+    display: flex;
     flex-direction: row;
     flex-grow: 1;
+}
+
+#countLower {
+    display: flex;
+    flex-direction: row;
 }
 
 #countButtons {
@@ -43,7 +54,7 @@ body {
     font-size: 8em;
 }
 
-button.counter {
+button.counter, button.incSelect {
     flex-grow: 1;
 }
 
@@ -93,6 +104,21 @@ button.red:hover:enabled {
 }
 
 button.red:active:enabled {
+    color: rgb(102, 0, 0);
+    background-color: rgb(51, 0, 0);
+}
+
+button.incSelect {
+    color: rgb(102, 102, 0);
+    background-color: rgb(153, 153, 51);
+}
+
+button.incSelect:hover:enabled {
+    color: rgb(102, 102, 51);
+    background-color: rgb(153, 153, 102);
+}
+
+button.incSelect:active:enabled {
     color: rgb(102, 0, 0);
     background-color: rgb(51, 0, 0);
 }
