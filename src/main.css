@@ -2,7 +2,7 @@
     font-family: 'Lexend';
     font-style: normal;
     font-weight: 400;
-    src: url('./fonts/lexend-v2-latin-regular.woff2') format('woff2'), url('./fonts/lexend-v2-latin-regular.woff') format('woff');
+    src: url('./fonts/lexend-v2-stripped-regular.woff2') format('woff2'), url('./fonts/lexend-v2-stripped-regular.woff') format('woff');
 }
 
 body {
