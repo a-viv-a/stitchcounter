@@ -14,11 +14,11 @@
 </head>
 
 <body>
-    <script src="./index.js" type="module"></script>
+    <script src="./index.js" type="module" async="true"></script>
 
     <div id="titleBlock">
 
-        <div>this is the title bar</div>
+        <input type="text" id="projectName" name="projectName" placeholder="project name">
 
     </div>
 
@@ -30,7 +30,7 @@
                 <div id="countButtons">
 
                     <button type="button" id="addButton" class="counter green noselect">+</button>
-                    <button type="button" id="removeButton" class="counter red noselect">-</button>
+                    <button type="button" id="removeButton" class="counter red noselect" disabled>-</button>
 
                 </div>
 
@@ -43,7 +43,7 @@
 
             </div>
             <div id="countLower">
-                <button type="button" id="mod1" class="incSelect noselect">1</button>
+                <button type="button" id="mod1" class="incSelect noselect" disabled>1</button>
                 <button type="button" id="mod3" class="incSelect noselect">3</button>
                 <button type="button" id="mod5" class="incSelect noselect">5</button>
                 <button type="button" id="mod10" class="incSelect noselect">10</button>

@@ -15,7 +15,7 @@ body {
     padding: 0;
 }
 
-#mainBlock, #countUpper, #countLower {
+#mainBlock, #countUpper, #countLower, #titleBlock {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
@@ -35,7 +35,7 @@ body {
     flex-grow: 3;
 }
 
-#countLower {
+#countLower, #titleBlock {
     flex-grow: 0;
 }
 
