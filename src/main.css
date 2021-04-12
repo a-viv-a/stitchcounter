@@ -49,11 +49,12 @@ body {
 }
 
 #countNumber {
+    text-transform: full-width;
     font-size: 25vmin;
 }
 
 #countLabel {
-    font-size: 3vmin;
+    font-size: 12vmin;
 }
 
 button.counter, button.incSelect {
