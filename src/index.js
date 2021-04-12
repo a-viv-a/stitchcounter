@@ -15,8 +15,11 @@ let elementArray = []
     ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock"]
         .forEach((id) => { elementArray.push(document.getElementById(id)) })
 let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock] = elementArray
-addButton.addEventListener("click", () => countNumber.number++)
-removeButton.addEventListener("click", () => countNumber.number--)
+let increment = 1
+addButton.addEventListener("click", () => countNumber.number += increment)
+removeButton.addEventListener("click", () => countNumber.number -= increment)
+
+//window managment
 const fixOrder = () => {
     if (document.body.clientWidth <= document.body.clientHeight) {
         if ((mainBlock.style.flexDirection || "row") === "row") {
