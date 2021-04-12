@@ -1,26 +1,35 @@
 class Counter {
     constructor() {
         this.element = document.getElementById("countNumber")
-        this._increment = 1
+        if (!localStorage.increment) localStorage.increment = 1
+        this._increment = parseInt(localStorage.increment)
+        this.number = (parseInt(localStorage.cRowStitches) || 0)
+        this.fixMods()
     }
     set number(value) {
         value = Math.max(0, value)
         removeButton.disabled = value <= 0
         this.element.textContent = value
+        localStorage.cRowStitches = value
     }
     get number() { return parseInt(this.element.textContent) }
     get increment() { return this._increment }
     set increment(value) {
         this._increment = value
+        localStorage.increment = value
+        this.fixMods()
+    }
+    fixMods() {
         valMod.forEach((i) => elementArray[i].disabled = false)
-        elementArray[valMod[value]].disabled = true
+        elementArray[valMod[this._increment]].disabled = true
     }
 }
 
-let count = new Counter(), elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5]
+let elementArray = [], valMod = [,2,,3,,4,,,,,5]
     ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock"]
         .forEach((id) => { elementArray.push(document.getElementById(id)) })
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock] = elementArray
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock] = elementArray,
+count = new Counter()
 addButton.addEventListener("click", () => count.number += count.increment)
 removeButton.addEventListener("click", () => count.number -= count.increment)
 
