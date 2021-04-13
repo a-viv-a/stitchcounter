@@ -1,11 +1,11 @@
-if("serviceWorker" in navigator){
-    navigator.serviceWorker.register("./sw.js")
-}
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js")
 class Counter {
     constructor() {
         this.element = document.getElementById("countNumber")
         if (!localStorage.increment) localStorage.increment = 1
         this._increment = parseInt(localStorage.increment)
+        this.stitches = JSON.parse(localStorage.stitches || false) || [this.number]
+        this.syncTable()
         this.number = (parseInt(localStorage.cRowStitches) || 0)
         this.fixMods()
     }
@@ -14,6 +14,8 @@ class Counter {
         removeButton.disabled = value <= 0
         this.element.textContent = value
         localStorage.cRowStitches = value
+        this.stitches[this.stitches.length-1] = value
+        this.syncTable()
     }
     get number() { return parseInt(this.element.textContent) }
     get increment() { return this._increment }
@@ -26,13 +28,24 @@ class Counter {
         valMod.forEach((i) => elementArray[i].disabled = false)
         elementArray[valMod[this._increment]].disabled = true
     }
+    syncTable() {
+        localStorage.stitches = JSON.stringify(this.stitches)
+        while (stitchTable.rows.length - 1 < this.stitches.length) {
+            let row = stitchTable.insertRow(-1)
+            row.insertCell(0).textContent = stitchTable.rows.length - 1
+            row.insertCell(1).textContent = 0
+        }
+        this.stitches.forEach((stitches, index)=>{
+            stitchTable.rows[index+1].cells[1].textContent = stitches
+        })
+    }
 }
 
 let elementArray = [], valMod = [,2,,3,,4,,,,,5]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock"]
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable"]
         .forEach((id) => { elementArray.push(document.getElementById(id)) })
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock] = elementArray,
-count = new Counter()
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable] = elementArray,
+    count = new Counter()
 addButton.addEventListener("click", () => count.number += count.increment)
 removeButton.addEventListener("click", () => count.number -= count.increment)
 
