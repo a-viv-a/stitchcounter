@@ -1,3 +1,6 @@
+if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("./sw.js")
+}
 class Counter {
     constructor() {
         this.element = document.getElementById("countNumber")
