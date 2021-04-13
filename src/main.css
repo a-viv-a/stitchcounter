@@ -15,7 +15,7 @@ body {
     padding: 0;
 }
 
-#mainBlock, #countUpper, #countLower, #titleBlock {
+#mainBlock, #countUpper, #countLower, #titleBlock, #rowControls {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
@@ -146,6 +146,22 @@ button.incSelect:disabled {
     flex: 1 1 1px;
 }
 
+#rowControls {
+    flex-grow: 0;
+}
+
+#newRow, #reset, table, th, td, caption {
+    font-size: 3vmin;
+}
+
+#newRow {
+    flex-grow: 2;
+}
+
+#reset {
+    flex-grow: 1;
+}
+
 table {
     margin: 0 auto;
     text-align: center;
@@ -155,7 +171,6 @@ table {
 }
 
 table, th, td, caption {
-    font-size: 3vmin;
     border: .3rem solid rgb(0, 0, 0);
     color: white;
     background-color: rgb(51, 0, 51);
