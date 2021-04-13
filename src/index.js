@@ -45,6 +45,15 @@ class Counter {
         this.syncTable(true)
         this.number = 0
     }
+    reset() {
+        if(!confirm("all data will be cleared.\nproceed?")) return
+        localStorage.clear()
+        this.stitches = [0]
+        this.number = 0
+        this.increment = 1
+        while(stitchTable.rows.length > 1) stitchTable.deleteRow(1)
+        this.syncTable()
+    }
 }
 
 let elementArray = [], valMod = [,2,,3,,4,,,,,5]
@@ -55,6 +64,7 @@ let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, st
 addButton.addEventListener("click", () => count.number += count.increment)
 removeButton.addEventListener("click", () => count.number -= count.increment)
 newRow.addEventListener("click", () => count.newRow())
+reset.addEventListener("click", () => count.reset())
 
 mod1.addEventListener("click", () => { mod1.disabled = true; count.increment = 1 })
 for (let i = 2; i <= 5; i++) {
