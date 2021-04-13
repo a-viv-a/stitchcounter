@@ -14,7 +14,7 @@ class Counter {
         removeButton.disabled = value <= 0
         this.element.textContent = value
         localStorage.cRowStitches = value
-        this.stitches[this.stitches.length-1] = value
+        this.stitches[this.stitches.length - 1] = value
         this.syncTable()
     }
     get number() { return parseInt(this.element.textContent) }
@@ -35,19 +35,25 @@ class Counter {
             row.insertCell(0).textContent = stitchTable.rows.length - 1
             row.insertCell(1).textContent = 0
         }
-        this.stitches.forEach((stitches, index)=>{
-            stitchTable.rows[index+1].cells[1].textContent = stitches
+        this.stitches.forEach((stitches, index) => {
+            stitchTable.rows[index + 1].cells[1].textContent = stitches
         })
+    }
+    newRow() {
+        this.stitches.push(0)
+        this.syncTable()
+        this.number = 0
     }
 }
 
 let elementArray = [], valMod = [,2,,3,,4,,,,,5]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable"]
-        .forEach((id) => { elementArray.push(document.getElementById(id)) })
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable] = elementArray,
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset"]
+        .forEach(id => elementArray.push(document.getElementById(id)))
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset] = elementArray,
     count = new Counter()
 addButton.addEventListener("click", () => count.number += count.increment)
 removeButton.addEventListener("click", () => count.number -= count.increment)
+newRow.addEventListener("click", () => count.newRow())
 
 mod1.addEventListener("click", () => { mod1.disabled = true; count.increment = 1 })
 for (let i = 2; i <= 5; i++) {
