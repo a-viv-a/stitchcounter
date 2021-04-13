@@ -138,16 +138,18 @@ button.incSelect:disabled {
     background-color: rgb(51, 51, 153);
 }
 
+#rowControls {
+    flex-grow: 0;
+    padding-bottom: 5px;
+}
+
 #tableBlock {
     color-scheme: dark;
-    overflow-y: auto;
+    overflow-y: scroll;
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     flex: 1 1 1px;
-}
-
-#rowControls {
-    flex-grow: 0;
+    padding: 0 5px;
 }
 
 #newRow, #reset, table, th, td, caption {
@@ -171,28 +173,24 @@ table {
 }
 
 table, th, td, caption {
-    border: .3rem solid rgb(0, 0, 0);
     color: white;
     background-color: rgb(51, 0, 51);
 }
 
 th, td, caption {
+    border: .3rem solid rgb(0, 0, 0);
     padding: .5rem 0rem;
 }
 
-td {
+td, caption {
     scroll-snap-align: start;
-}
-
-caption {
-    scroll-snap-align: start;
-    border-bottom: none;
 }
 
 th {
     position: sticky;
     top: 0;
     z-index: 2;
+    background-color: rgb(102,0,102);
 }
 
 .noselect {
