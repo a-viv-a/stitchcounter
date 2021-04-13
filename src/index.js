@@ -28,7 +28,7 @@ class Counter {
         valMod.forEach((i) => elementArray[i].disabled = false)
         elementArray[valMod[this._increment]].disabled = true
     }
-    syncTable() {
+    syncTable(scroll = false) {
         localStorage.stitches = JSON.stringify(this.stitches)
         while (stitchTable.rows.length - 1 < this.stitches.length) {
             let row = stitchTable.insertRow(-1)
@@ -37,11 +37,12 @@ class Counter {
         }
         this.stitches.forEach((stitches, index) => {
             stitchTable.rows[index + 1].cells[1].textContent = stitches
+            if (scroll && index === this.stitches.length - 1) stitchTable.rows[index + 1].scrollIntoView()
         })
     }
     newRow() {
         this.stitches.push(0)
-        this.syncTable()
+        this.syncTable(true)
         this.number = 0
     }
 }
