@@ -7,12 +7,74 @@
     <title>stitchcounter</title>
     <meta name="author" content="isaac">
     <meta name="description" content="a very lightweight stitchcounter, for the web">
+    <meta name="theme-color" content="#663399">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./main.css">
+    <link rel="modulepreload" href="./index.js" as="script" type="text/javascript">
+    <link rel="preload" href="./fonts/lexend-v2-stripped-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="icon" href="./icons/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="./icons/favicon-128.png" sizes="128x128">
+    <link rel="icon" href="./icons/favicon-192.png" sizes="192x192">
+
+    <link rel="shortcut icon" href="./icons/favicon-196.png" sizes="196x196">
+
+    <link rel="apple-touch-icon" href="./icons/favicon-152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="./icons/favicon-180.png" sizes="180x180">
 </head>
 
 <body>
-    <script src="./index.js" type="module"></script>
-    <div>stitchcounter!</div>
+    <script src="./index.js" type="module" async="true"></script>
+
+    <div id="titleBlock"></div>
+
+    <div id="mainBlock">
+
+        <div id="countBlock">
+            <div id="countUpper">
+
+                <div id="countButtons">
+
+                    <button type="button" id="addButton" class="counter green noselect">+</button>
+                    <button type="button" id="removeButton" class="counter red noselect" disabled>-</button>
+
+                </div>
+
+                <div id="count">
+
+                    <div id="countNumber" class="noselect"></div>
+                    <div id="countLabel" class="noselect">stitches</div>
+
+                </div>
+
+            </div>
+            <div id="countLower">
+                <button type="button" id="mod1" class="incSelect noselect">1</button>
+                <button type="button" id="mod3" class="incSelect noselect">3</button>
+                <button type="button" id="mod5" class="incSelect noselect">5</button>
+                <button type="button" id="mod10" class="incSelect noselect">10</button>
+            </div>
+
+        </div>
+        <div id="rowBlock">
+            <div id="rowControls">
+                <button type="button" id="newRow" class="incSelect noselect">new row</button>
+                <button type="reset" id="reset" class="red noselect">reset</button>
+            </div>
+            <div id="tableBlock">
+                <table id="stitchTable">
+                    <caption>row stitchcounts</caption>
+                    <tr>
+                        <th id="tableHeadRow">row</th>
+                        <th id="tableHeadStitches">stitches</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
