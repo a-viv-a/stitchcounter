@@ -1,0 +1,17 @@
+name: github page deployment
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub Pages Overwriter
+        uses: rayluo/github-pages-overwriter@v1.1
+
+        with:
+          source-directory: source
+          target-branch: gh_pages
