@@ -65,9 +65,7 @@ button {
     text-decoration: none;
     font-size: 10vmin;
     font-family: 'Lexend', sans-serif;
-    transition-timing-function: cubic-bezier(.22, .75, .29, .82);
-    transition-duration: 1.5s;
-    transition-property: color, background-color;
+    transition: color, background-color 1.5s cubic-bezier(.22, .75, .29, .82);
 }
 
 button.counter {
@@ -79,9 +77,7 @@ button:focus {
 }
 
 button:active {
-    transition-timing-function: cubic-bezier(.04, 1.11, .09, .91);
-    transition-duration: .5s;
-    transition-property: color, background-color;
+    transition: color, background-color .5s cubic-bezier(.04, 1.11, .09, .91);
 }
 
 button.green {
