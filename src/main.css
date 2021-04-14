@@ -151,7 +151,7 @@ button.incSelect:disabled {
 }
 
 #newRow, #reset, table, th, td, caption {
-    font-size: 3vmin;
+    font-size: 3vh;
 }
 
 #newRow {
