@@ -1,0 +1,20 @@
+name: github page deployment
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+        
+      - name: GitHub Pages Overwriter
+        uses: rayluo/github-pages-overwriter@v1.1
+
+        with:
+          source-directory: src
+          target-branch: gh_pages
