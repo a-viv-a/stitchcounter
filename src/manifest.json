@@ -2,6 +2,7 @@
     "name": "stitchcounter",
     "short_name": "stitchcounter",
     "start_url": "index.html",
+    "description": "a lightweight offline compatible stitch counter for the web",
     "icons": [
         {
             "src": "./icons/favicon-512.png",
@@ -25,7 +26,7 @@
         }
     ],
     "display": "standalone",
-    "orientation": "landscape",
+    "orientation": "landscape-primary",
     "background_color": "#330033",
     "theme_color": "#663399"
 }
