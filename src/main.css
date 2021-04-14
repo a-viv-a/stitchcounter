@@ -67,6 +67,7 @@ button {
     font-family: 'Lexend', sans-serif;
     transition-timing-function: cubic-bezier(.22, .75, .29, .82);
     transition-duration: 1.5s;
+    transition-property: color, background-color;
 }
 
 button.counter {
@@ -80,6 +81,7 @@ button:focus {
 button:active {
     transition-timing-function: cubic-bezier(.04, 1.11, .09, .91);
     transition-duration: .5s;
+    transition-property: color, background-color;
 }
 
 button.green {
