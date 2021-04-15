@@ -10,9 +10,14 @@ body {
     font-family: 'Lexend', sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
     margin: 0;
     padding: 0;
+}
+
+html {
+    height: -webkit-fill-available;
 }
 
 #mainBlock, #countUpper, #countLower, #titleBlock, #rowControls {
@@ -188,7 +193,7 @@ th {
     position: sticky;
     top: 0;
     z-index: 2;
-    background-color: rgb(102,0,102);
+    background-color: rgb(102, 0, 102);
 }
 
 .noselect {
