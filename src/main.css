@@ -10,9 +10,15 @@ body {
     font-family: 'Lexend', sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    overflow: hidden;
     margin: 0;
     padding: 0;
+}
+
+html {
+    height: -webkit-fill-available;
 }
 
 #mainBlock, #countUpper, #countLower, #titleBlock, #rowControls {
@@ -66,6 +72,8 @@ button {
     font-size: 10vmin;
     font-family: 'Lexend', sans-serif;
     transition: color, background-color 1.5s cubic-bezier(.22, .75, .29, .82);
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
 }
 
 button.counter {
@@ -151,7 +159,7 @@ button.incSelect:disabled {
 }
 
 #newRow, #reset, table, th, td, caption {
-    font-size: 3vmin;
+    font-size: 3vh;
 }
 
 #newRow {
@@ -188,7 +196,7 @@ th {
     position: sticky;
     top: 0;
     z-index: 2;
-    background-color: rgb(102,0,102);
+    background-color: rgb(102, 0, 102);
 }
 
 .noselect {
