@@ -71,6 +71,8 @@ button {
     font-size: 10vmin;
     font-family: 'Lexend', sans-serif;
     transition: color, background-color 1.5s cubic-bezier(.22, .75, .29, .82);
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
 }
 
 button.counter {
