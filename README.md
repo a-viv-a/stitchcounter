@@ -1,4 +1,4 @@
-# stitchcounter
+<h1 overflow="auto">stitchcounter<img src="/src/icons/favicon-128.png" align="right"/></h1>
 A lightweight offline compatible stitch counter for the web. Using service workers, the entire page is cached when it is first viewed, at which point it no longer requires internet connection. And why should it? Keeping track of a few numbers is very simple, but popular alternatives always require on internet or heavy app installs. This requires neither, but does support PWA installation if you desire, although the experience is identical to the web experience. All stitch data is stored to local storage, so it should be persistent across reloads and reboots. Hosted with github pages, at [stitchcount.xyz](https://stitchcount.xyz).
 # screenshots
 <table>
