@@ -1,12 +1,12 @@
-const cacheName = "stitchcounter-v1.0.2", //semvar.org
+const cacheName = "stitchcounter-v1.0.3", //semvar.org
     contentToCache = [
         "index.html",
         "index.js",
         "main.css",
         "fonts/lexend-v2-stripped-regular.woff",
-        "fonts/lexend-v2-stripped-regular.woff2"
+        "fonts/lexend-v2-stripped-regular.woff2",
+        "icons/favicon-128.png"
     ]
-    ;[32, 128, 152, 167, 180, 192, 196, 512].forEach((e) => contentToCache.push(`icons/favicon-${e}.png`))
 self.addEventListener("install", e => {
     e.waitUntil((async () => {
         const cache = await caches.open(cacheName)
