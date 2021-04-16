@@ -39,7 +39,6 @@ class Counter {
         //update the onscreen buttons
         this.fixMods()
     }
-
     fixMods() {
         //enable all buttons
         valMod.forEach((i) => elementArray[i].disabled = false)
@@ -83,7 +82,7 @@ class Counter {
 }
 
 //get all the html elements, and init the counter object
-let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5]
+let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
     ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset"]
         .forEach(id => elementArray.push(document.getElementById(id)))
 let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset] = elementArray,
@@ -103,17 +102,21 @@ addEl(newRow, () => count.newRow())
 addEl(reset, () => count.reset())
 
 for (let i = 2; i <= 5; i++) { //add the listeners for mod buttons programatically using element array
-    addEl(elementArray[i], () => count.increment = [1, 3, 5, 10][i - 2])
+    addEl(elementArray[i], () => count.increment = mods[i - 2])
 }
 
 // add eventlistener to handle keyboard input
-// document.addEventListener("keydown", ev => {
-//     ({
-//         Space: addButton,
-//         ArrowUp: addButton,
-//         ArrowDown: removeButton,
-//     }[ev.code]).click()
-// })
+addEl(document, ev => {
+    console.log(ev.code)
+    switch (ev.code) {
+        case "Space":
+        case "ArrowUp":
+            addButton.click()
+            break
+        case "ArrowDown":
+            removeButton.click()
+    }
+}, "keydown")
 
 //window managment
 const fixOrder = () => {
