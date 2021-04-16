@@ -46,17 +46,17 @@ class Counter {
         this.number = 0
     }
     reset() {
-        if(!confirm("all data will be cleared.\nproceed?")) return
+        if (!confirm("all rows, stitches and other data will be cleared.\nproceed?")) return
         localStorage.clear()
         this.stitches = [0]
         this.number = 0
         this.increment = 1
-        while(stitchTable.rows.length > 1) stitchTable.deleteRow(1)
+        while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
         this.syncTable()
     }
 }
 
-let elementArray = [], valMod = [,2,,3,,4,,,,,5]
+let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5]
     ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset"]
         .forEach(id => elementArray.push(document.getElementById(id)))
 let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset] = elementArray,
