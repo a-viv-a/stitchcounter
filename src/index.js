@@ -91,20 +91,19 @@ let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, st
 
 //function to add event listener to element
 //this function will be made into single char by terser
-// const addEL = (element, ev, fn) => {
-//     element.addEventListener(ev, fn)
-// }
+const addEl = (element, fn, ev = "click") => {
+    element.addEventListener(ev, fn)
+}
 
 //add all the event listeners
-addButton.addEventListener("click", () => count.number += count.increment)
-removeButton.addEventListener("click", () => count.number -= count.increment)
+addEl(addButton, () => count.number += count.increment)
+addEl(removeButton, () => count.number -= count.increment)
 
-newRow.addEventListener("click", () => count.newRow())
-reset.addEventListener("click", () => count.reset())
+addEl(newRow, () => count.newRow())
+addEl(reset, () => count.reset())
 
-mod1.addEventListener("click", () => { mod1.disabled = true; count.increment = 1 })
 for (let i = 2; i <= 5; i++) { //add the listeners for mod buttons programatically using element array
-    elementArray[i].addEventListener("click", () => count.increment = [1, 3, 5, 10][i - 2])
+    addEl(elementArray[i], () => count.increment = [1, 3, 5, 10][i - 2])
 }
 
 // add eventlistener to handle keyboard input
@@ -130,5 +129,5 @@ const fixOrder = () => {
         }
     }
 }
-window.addEventListener("resize", fixOrder)
-window.addEventListener("load", fixOrder)
+addEl(window, fixOrder, "resize")
+addEl(window, fixOrder, "load")
