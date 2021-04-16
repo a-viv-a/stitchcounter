@@ -11,6 +11,14 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v2
+
+      - name: Install npm cli tools
+        run: |
+          npm install terser@5.6.1
+          npm install clean-css-cli@5.2.2
+
+      - name: run ugly.sh to minify scripts in place
+        run: ./ugly.sh
         
       - name: GitHub Pages Overwriter
         uses: rayluo/github-pages-overwriter@v1.1
