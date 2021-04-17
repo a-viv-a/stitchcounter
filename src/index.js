@@ -41,7 +41,7 @@ class Counter {
     }
 
     shiftMods(value) {
-        this.increment = mods[mods.indexOf(this.increment)+value] || this._increment
+        this.increment = mods[mods.indexOf(this.increment) + value] || this._increment
     }
     fixMods() {
         //enable all buttons
@@ -111,7 +111,9 @@ for (let i = 2; i <= 5; i++) { //add the listeners for mod buttons programatical
 
 // add eventlistener to handle keyboard input
 addEl(document, ev => {
+    if(ev.repeat) return
     console.log(ev.code)
+    let handled = true
     switch (ev.code) {
         case "Space":
         case "ArrowUp":
@@ -125,7 +127,11 @@ addEl(document, ev => {
             break
         case "ArrowDown":
             removeButton.click()
+            break
+        default:
+            handled = false
     }
+    if (handled) ev.preventDefault()
 }, "keydown")
 
 //window managment
