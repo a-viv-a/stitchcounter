@@ -39,6 +39,10 @@ class Counter {
         //update the onscreen buttons
         this.fixMods()
     }
+
+    shiftMods(value) {
+        this.increment = mods[mods.indexOf(this.increment)+value] || this._increment
+    }
     fixMods() {
         //enable all buttons
         valMod.forEach((i) => elementArray[i].disabled = false)
@@ -112,6 +116,12 @@ addEl(document, ev => {
         case "Space":
         case "ArrowUp":
             addButton.click()
+            break
+        case "ArrowRight":
+            count.shiftMods(1)
+            break
+        case "ArrowLeft":
+            count.shiftMods(-1)
             break
         case "ArrowDown":
             removeButton.click()
