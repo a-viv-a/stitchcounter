@@ -1,17 +1,20 @@
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js")
-
+const l = localStorage
 class Counter {
     constructor() {
         this.element = document.getElementById("countNumber")
 
+        //get the counters array or make it
+        this.counters = JSON.parse(l.counters || '[{"name":"default","increment":1,"stitches":[0]}]')
+
         //load increment or set it to 1
-        this.increment = (parseInt(localStorage.increment) || 1)
+        this.increment = (parseInt(l.increment) || 1)
 
         //make the stitches array or load it from storage
-        this.stitches = JSON.parse(localStorage.stitches || false) || [this.number]
+        this.stitches = JSON.parse(l.stitches || false) || [0]
 
         //load current row number from storage or set it to zero
-        this.number = (parseInt(localStorage.cRowStitches) || 0)
+        this.number = (parseInt(l.cRowStitches) || 0)
     }
 
     get number() { return this._number }
@@ -24,7 +27,7 @@ class Counter {
         //store the new value
         this._number = value
         //store to localstorage
-        localStorage.cRowStitches = value
+        l.cRowStitches = value
         //write the new value to the newest row
         this.stitches[this.stitches.length - 1] = value
         //update the table to show the value
@@ -35,7 +38,7 @@ class Counter {
     set increment(value) {
         //store the new value
         this._increment = value
-        localStorage.increment = value
+        l.increment = value
         //update the onscreen buttons
         this.fixMods()
     }
@@ -51,7 +54,7 @@ class Counter {
     }
     syncTable(scroll = false) {
         //store the table to localstorage
-        localStorage.stitches = JSON.stringify(this.stitches)
+        l.stitches = JSON.stringify(this.stitches)
         //ensure we have enough rows to show all our data
         while (stitchTable.rows.length - 1 < this.stitches.length) {
             let row = stitchTable.insertRow(-1)
@@ -74,7 +77,7 @@ class Counter {
         //dont proceed if the popup is canceled
         if (!confirm("all rows, stitches and other data will be cleared.\nproceed?")) return
         //clear localstorage data
-        localStorage.clear()
+        l.clear()
         //reset values to default
         this.stitches = [0]
         this.number = 0
@@ -111,7 +114,7 @@ for (let i = 2; i <= 5; i++) { //add the listeners for mod buttons programatical
 
 // add eventlistener to handle keyboard input
 addEl(document, ev => {
-    if(ev.repeat) return
+    if (ev.repeat) return
     console.log(ev.code)
     let handled = true
     switch (ev.code) {
