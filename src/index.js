@@ -97,6 +97,7 @@ class Counter {
         l.clear()
         //reset values to default
         this.number = 0
+        this.stitches = [0]
         this.increment = 1
         //delete all the rows in the onscreen table, leaving the labels
         while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
