@@ -5,19 +5,36 @@ class Counter {
         this.element = document.getElementById("countNumber")
 
         //get the counters array or make it
-        this.counters = JSON.parse(l.counters || '[{"name":"default","increment":1,"stitches":[0]}]')
+        this._counters = JSON.parse(l.counters || '[{"name":"default","increment":1,"stitches":[0]}]')
+        this.index = 0
 
-        //load increment or set it to 1
-        this.increment = (parseInt(l.increment) || 1)
+        //handle data migration
+        if (l.stitches || l.increment) {
+            this.counters[0].increment = l.increment
+            this.counters[0].stitches = l.stitches
+            delete l.stitches
+            delete l.increment
+            delete l.cRowStitches
+            console.log("old data migrated")
+        }
 
-        //make the stitches array or load it from storage
-        this.stitches = JSON.parse(l.stitches || false) || [0]
-
-        //load current row number from storage or set it to zero
-        this.number = (parseInt(l.cRowStitches) || 0)
+        this.syncStorage()
+        //seems silly but this runs the functions in setters
+        this.number = this.number
+        this.increment = this.increment
     }
 
-    get number() { return this._number }
+    get counters() { return this._counters }
+    set counters(value) { this._counters = value; this.syncStorage() }
+
+    get counter() { return this.counters[this.index] }
+    set counter(value) { this.counters[this.index] = value }
+
+    get stitches() { return this.counter.stitches }
+    set stitches(value) { this.counter.stitches = value }
+
+
+    get number() { return this.stitches[this.stitches.length - 1] }
     set number(value) {
         value = Math.max(0, value) //clamp values
         //disable remove button if value is zero
@@ -25,20 +42,19 @@ class Counter {
         //display the new value on screen
         this.element.textContent = value
         //store the new value
-        this._number = value
+        this.stitches[this.stitches.length - 1] = value
         //store to localstorage
-        l.cRowStitches = value
+        this.syncStorage()
         //write the new value to the newest row
         this.stitches[this.stitches.length - 1] = value
         //update the table to show the value
         this.syncTable()
     }
 
-    get increment() { return this._increment }
+    get increment() { return this.counter.increment }
     set increment(value) {
         //store the new value
-        this._increment = value
-        l.increment = value
+        this.counter.increment = value
         //update the onscreen buttons
         this.fixMods()
     }
@@ -50,11 +66,9 @@ class Counter {
         //enable all buttons
         valMod.forEach((i) => elementArray[i].disabled = false)
         //disable the button that corresponds to the increment
-        elementArray[valMod[this._increment]].disabled = true
+        elementArray[valMod[this.increment]].disabled = true
     }
     syncTable(scroll = false) {
-        //store the table to localstorage
-        l.stitches = JSON.stringify(this.stitches)
         //ensure we have enough rows to show all our data
         while (stitchTable.rows.length - 1 < this.stitches.length) {
             let row = stitchTable.insertRow(-1)
@@ -68,6 +82,9 @@ class Counter {
             if (scroll && index === this.stitches.length - 1) stitchTable.rows[index + 1].scrollIntoView()
         })
     }
+    syncStorage() {
+        l.counters = JSON.stringify(this.counters)
+    }
     newRow() {
         this.stitches.push(0) //add element to the array
         this.syncTable(true) //sync it to the onscreen table, and scroll it into view
@@ -75,11 +92,10 @@ class Counter {
     }
     reset() {
         //dont proceed if the popup is canceled
-        if (!confirm("all rows, stitches and other data will be cleared.\nproceed?")) return
+        if (!confirm("all rows, stitches and other data in all counters will be cleared.\nproceed?")) return
         //clear localstorage data
         l.clear()
         //reset values to default
-        this.stitches = [0]
         this.number = 0
         this.increment = 1
         //delete all the rows in the onscreen table, leaving the labels
