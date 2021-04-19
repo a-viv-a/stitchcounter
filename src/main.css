@@ -143,6 +143,10 @@ button.incSelect:disabled {
     background-color: rgb(51, 51, 153);
 }
 
+button.tab, #newTab{
+    font-size: 4vmin;
+}
+
 button.tab {
     flex: 1 1;
     overflow: hidden;
@@ -150,9 +154,22 @@ button.tab {
     text-overflow: ellipsis;
     color: rgb(204, 102, 204);
     background-color: rgb(51, 0, 51);
-    font-size: 4vmin;
     padding: .75vmin;
     border: 1vmin solid rgb(102, 0, 102);
+}
+
+#newTab {
+    width: 8vmin;
+    flex-grow: 0;
+    background-color: rgb(51, 0, 51);
+}
+
+#newTab:hover {
+    background-color: rgb(102, 0, 51);
+}
+
+#newTab:active {
+    background-color: rgb(204, 0, 51);
 }
 
 #rowControls {
