@@ -155,7 +155,9 @@ button.tab {
     color: rgb(204, 102, 204);
     background-color: rgb(51, 0, 51);
     padding: .75vmin;
+    padding-bottom: 1.50vmin;
     border: 1vmin solid rgb(102, 0, 102);
+    border-bottom-style: hidden;
 }
 
 button.tab:hover:enabled {
@@ -164,7 +166,7 @@ button.tab:hover:enabled {
 }
 
 button.tab:active:enabled {
-    color: rgb(102, 0, 153);
+    color: rgb(255, 153, 255);
     background-color: rgb(51, 0, 51);
 }
 
