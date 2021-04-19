@@ -1,5 +1,10 @@
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js")
 const l = localStorage
+//function to add event listener to element
+//this function will be made into single char by terser
+const addEl = (element, fn, ev = "click") => {
+    element.addEventListener(ev, fn)
+}
 class Counter {
     constructor() {
         this.element = document.getElementById("countNumber")
@@ -22,6 +27,9 @@ class Counter {
         //seems silly but this runs the functions in setters
         this.number = this.number
         this.increment = this.increment
+
+        //make the tabs
+        this.makeTab("test")
     }
 
     get counters() { return this._counters }
@@ -90,6 +98,13 @@ class Counter {
         this.syncTable(true) //sync it to the onscreen table, and scroll it into view
         this.number = 0 //reset current row
     }
+    makeTab(name) {
+        let tab = document.createElement("button")
+        tab.className = "tab"
+        tab.textContent = name
+        addEl(tab, ()=>console.log(`${name} was clicked`))
+        titleBlock.insertBefore(tab, newTab)
+    }
     reset() {
         //dont proceed if the popup is canceled
         if (!confirm("all rows, stitches and other data in all counters will be cleared.\nproceed?")) return
@@ -107,16 +122,10 @@ class Counter {
 
 //get all the html elements, and init the counter object
 let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset"]
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab"]
         .forEach(id => elementArray.push(document.getElementById(id)))
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset] = elementArray,
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab] = elementArray,
     count = new Counter()
-
-//function to add event listener to element
-//this function will be made into single char by terser
-const addEl = (element, fn, ev = "click") => {
-    element.addEventListener(ev, fn)
-}
 
 //add all the event listeners
 addEl(addButton, () => count.number += count.increment)
