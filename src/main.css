@@ -70,7 +70,7 @@ button {
     text-decoration: none;
     font-size: 10vmin;
     font-family: 'Lexend', sans-serif;
-    transition: color, background-color 1.5s cubic-bezier(.22, .75, .29, .82);
+    transition: color 1.5s cubic-bezier(.22, .75, .29, .82), background-color 1.5s cubic-bezier(.22, .75, .29, .82);
     touch-action: manipulation;
     -ms-touch-action: manipulation;
 }
@@ -84,7 +84,7 @@ button:focus {
 }
 
 button:active {
-    transition: color, background-color .5s cubic-bezier(.04, 1.11, .09, .91);
+    transition: color .5s cubic-bezier(.04, 1.11, .09, .91), background-color .5s cubic-bezier(.04, 1.11, .09, .91);
 }
 
 button.green {
@@ -156,6 +156,21 @@ button.tab {
     background-color: rgb(51, 0, 51);
     padding: .75vmin;
     border: 1vmin solid rgb(102, 0, 102);
+}
+
+button.tab:hover:enabled {
+    color: rgb(204, 102, 255);
+    background-color: rgb(51, 0, 102);
+}
+
+button.tab:active:enabled {
+    color: rgb(102, 0, 153);
+    background-color: rgb(51, 0, 51);
+}
+
+button.tab:disabled {
+    color: white;
+    background-color: rgb(102, 0, 102);
 }
 
 #newTab {
