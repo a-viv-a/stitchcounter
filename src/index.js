@@ -100,7 +100,7 @@ class Counter {
             if (scroll && index === this.stitches.length - 1) stitchTable.rows[index + 1].scrollIntoView()
         })
     }
-    clearTable(){
+    clearTable() {
         while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
     }
     syncStorage() {
@@ -115,13 +115,14 @@ class Counter {
         let tab = document.createElement("button")
         tab.className = "tab"
         tab.textContent = name
-        addEl(tab, ()=>{
+        addEl(tab, () => {
             this.enableAllTabs()
             tab.disabled = true
             this.clearTable()
             this.setCounter(name)
         })
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
+        return tab
     }
     enableAllTabs() {
         this.tabs.forEach(tab => tab.disabled = false)
@@ -142,11 +143,9 @@ class Counter {
         //clear localstorage data
         l.clear()
         //reset values to default
-        this.number = 0
-        this.stitches = [0]
-        this.increment = 1
-        //delete all the rows in the onscreen table, leaving the labels
-        while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
+        this.counters = [{ name: "default", increment: 1, stitches: [0] }]
+        // //delete all the rows in the onscreen table, leaving the labels
+        this.clearTable()
         this.syncTable()
     }
 }
@@ -164,6 +163,21 @@ addEl(removeButton, () => count.number -= count.increment)
 
 addEl(newRow, () => count.newRow())
 addEl(reset, () => count.reset())
+
+addEl(newTab, () => {
+    let name = prompt(
+        "name your new counter\nnames cannot be reused, and will display in all lowercase",
+        `default${count.counters.length + 1}`
+    )
+    if (name === "" || name === null) return
+    name = name.toLowerCase()
+    if (count.counters.some(counter => counter.name === name)) {
+        alert("name is already in use")
+        return
+    }
+    count.counters.push({ name: name, increment: 1, stitches: [0] })
+    count.makeTab(name).click()
+})
 
 for (let i = 2; i <= 5; i++) { //add the listeners for mod buttons programatically using element array
     addEl(elementArray[i], () => count.increment = mods[i - 2])
