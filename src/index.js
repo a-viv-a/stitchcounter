@@ -15,8 +15,8 @@ class Counter {
 
         //handle data migration
         if (l.stitches || l.increment) {
-            this.counters[0].increment = l.increment
-            this.counters[0].stitches = l.stitches
+            this.counters[0].increment = parseInt(l.increment)
+            this.counters[0].stitches = JSON.parse(l.stitches)
             delete l.stitches
             delete l.increment
             delete l.cRowStitches
@@ -29,7 +29,9 @@ class Counter {
         this.increment = this.increment
 
         //make the tabs
-        this.makeTab("test")
+        this.tabs = []
+        this._counters.forEach(counter => this.makeTab(counter.name))
+        this.tabs[0].disabled = true
     }
 
     get counters() { return this._counters }
@@ -102,8 +104,7 @@ class Counter {
         let tab = document.createElement("button")
         tab.className = "tab"
         tab.textContent = name
-        addEl(tab, ()=>console.log(`${name} was clicked`))
-        titleBlock.insertBefore(tab, newTab)
+        this.tabs.push(titleBlock.insertBefore(tab, newTab))
     }
     reset() {
         //dont proceed if the popup is canceled
