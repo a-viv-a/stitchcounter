@@ -144,9 +144,8 @@ class Counter {
         l.clear()
         //reset values to default
         this.counters = [{ name: "default", increment: 1, stitches: [0] }]
-        // //delete all the rows in the onscreen table, leaving the labels
-        this.clearTable()
-        this.syncTable()
+        this.tabs.forEach(tab => tab.remove())
+        this.makeTab("default").click()
     }
 }
 
