@@ -100,6 +100,9 @@ class Counter {
             if (scroll && index === this.stitches.length - 1) stitchTable.rows[index + 1].scrollIntoView()
         })
     }
+    clearTable(){
+        while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
+    }
     syncStorage() {
         l.counters = JSON.stringify(this.counters)
     }
@@ -112,6 +115,12 @@ class Counter {
         let tab = document.createElement("button")
         tab.className = "tab"
         tab.textContent = name
+        addEl(tab, ()=>{
+            this.enableAllTabs()
+            tab.disabled = true
+            this.clearTable()
+            this.setCounter(name)
+        })
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
     }
     enableAllTabs() {
