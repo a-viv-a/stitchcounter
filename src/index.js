@@ -11,7 +11,7 @@ class Counter {
 
         //get the counters array or make it
         this._counters = JSON.parse(l.counters || '[{"name":"default","increment":1,"stitches":[0]}]')
-        this.index = 0
+        this._index = 0
 
         //handle data migration
         if (l.stitches || l.increment) {
@@ -32,6 +32,14 @@ class Counter {
         this.tabs = []
         this._counters.forEach(counter => this.makeTab(counter.name))
         this.tabs[0].disabled = true
+    }
+
+    get index() { return this._index }
+    set index(value) {
+        this._index = value
+        //this should be a function
+        this.number = this.number
+        this.increment = this.increment
     }
 
     get counters() { return this._counters }
@@ -105,6 +113,19 @@ class Counter {
         tab.className = "tab"
         tab.textContent = name
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
+    }
+    enableAllTabs() {
+        this.tabs.forEach(tab => tab.disabled = false)
+    }
+    setCounter(name) {
+        this.counters.some(
+            (counter, index) => {
+                if (counter.name === name) {
+                    this.index = index
+                    return true
+                }
+            }
+        )
     }
     reset() {
         //dont proceed if the popup is canceled
