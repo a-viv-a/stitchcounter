@@ -193,16 +193,20 @@ button.tab:disabled {
     flex-grow: 0;
 }
 
+#spacer {
+    height: 5px;
+}
+
 #tableBlock {
     color-scheme: dark;
     overflow-y: scroll;
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     flex: 1 1 1px;
-    padding: 5px 5px 0px 5px;
+    padding: 0px 5px;
 }
 
-#newRow, #reset, #options, table, th, td, caption {
+#newRow, table, th, td, caption, button.option {
     font-size: 3vh;
 }
 
@@ -210,13 +214,14 @@ button.tab:disabled {
     flex-grow: 5;
 }
 
-#reset, #options {
+button.option {
     flex-grow: 1;
 }
 
 #optionsDiv {
     display: none;
     flex-grow: 0;
+    flex-wrap: wrap;
 }
 
 table {
