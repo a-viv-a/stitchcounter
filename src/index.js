@@ -151,9 +151,9 @@ class Counter {
 
 //get all the html elements, and init the counter object
 let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab"]
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv"]
         .forEach(id => elementArray.push(document.getElementById(id)))
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab] = elementArray,
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv] = elementArray,
     count = new Counter()
 
 //add all the event listeners
@@ -161,6 +161,9 @@ addEl(addButton, () => count.number += count.increment)
 addEl(removeButton, () => count.number -= count.increment)
 
 addEl(newRow, () => count.newRow())
+addEl(options, () => {
+    optionsDiv.style.display = optionsDiv.style.display === "flex" ? "none" : "flex"
+})
 addEl(reset, () => count.reset())
 
 addEl(newTab, () => {

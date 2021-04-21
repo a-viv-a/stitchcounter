@@ -21,7 +21,7 @@ html {
     height: -webkit-fill-available;
 }
 
-#mainBlock, #countUpper, #countLower, #titleBlock, #rowControls {
+#mainBlock, #countUpper, #countLower, #titleBlock, #rowControls, #optionsDiv {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
@@ -191,7 +191,6 @@ button.tab:disabled {
 
 #rowControls {
     flex-grow: 0;
-    padding-bottom: 5px;
 }
 
 #tableBlock {
@@ -200,19 +199,24 @@ button.tab:disabled {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     flex: 1 1 1px;
-    padding: 0 5px;
+    padding: 5px 5px 0px 5px;
 }
 
-#newRow, #reset, table, th, td, caption {
+#newRow, #reset, #options, table, th, td, caption {
     font-size: 3vh;
 }
 
 #newRow {
-    flex-grow: 2;
+    flex-grow: 5;
 }
 
-#reset {
+#reset, #options {
     flex-grow: 1;
+}
+
+#optionsDiv {
+    display: none;
+    flex-grow: 0;
 }
 
 table {
