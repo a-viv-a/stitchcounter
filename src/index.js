@@ -23,10 +23,8 @@ class Counter {
             console.log("old data migrated")
         }
 
-        this.syncStorage()
-        //seems silly but this runs the functions in setters
-        this.number = this.number
-        this.increment = this.increment
+        //sync all this data to the display and the storage
+        this.sync(true, true, true)
 
         //make the tabs
         this.tabs = []
@@ -37,19 +35,17 @@ class Counter {
     get index() { return this._index }
     set index(value) {
         this._index = value
-        //this should be a function
-        this.number = this.number
-        this.increment = this.increment
+        this.sync(true, false, true)
     }
 
     get counters() { return this._counters }
-    set counters(value) { this._counters = value; this.syncStorage() }
+    set counters(value) { this._counters = value; this.sync() }
 
     get counter() { return this.counters[this.index] }
     set counter(value) { this.counters[this.index] = value }
 
     get stitches() { return this.counter.stitches }
-    set stitches(value) { this.counter.stitches = value; this.syncTable(); }
+    set stitches(value) { this.counter.stitches = value; this.sync(false); }
 
 
     get number() { return this.stitches[this.stitches.length - 1] }
@@ -70,8 +66,9 @@ class Counter {
     }
 
     sync(mod = true, storage = true, scroll = false) {
+        console.log("sync!")
         if (storage) l.counters = JSON.stringify(this.counters)
-        
+
         //disable remove button if value is zero
         removeButton.disabled = this.number == 0
         //display the new value on screen
@@ -107,6 +104,7 @@ class Counter {
         console.log("mod no more")
     }
     syncTable(scroll = false) {
+        console.log("sync no more")
     }
     clearTable() {
         while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
@@ -116,7 +114,7 @@ class Counter {
     }
     newRow() {
         this.stitches.push(0) //add element to the array
-        this.syncTable(true) //sync it to the onscreen table, and scroll it into view
+        this.sync(false, true, true) //sync it to the onscreen table, and scroll it into view
         this.number = 0 //reset current row
     }
     makeTab(name) {
