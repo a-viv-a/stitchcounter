@@ -45,7 +45,7 @@ class Counter {
     set counter(value) { this.counters[this.index] = value }
 
     get stitches() { return this.counter.stitches }
-    set stitches(value) { this.counter.stitches = value; this.sync(false); }
+    set stitches(value) { this.counter.stitches = value; this.sync(false) }
 
 
     get number() { return this.stitches[this.stitches.length - 1] }
@@ -83,11 +83,16 @@ class Counter {
         }
 
         //sync the table
-        //ensure we have enough rows to show all our data
-        while (stitchTable.rows.length - 1 < this.stitches.length) {
-            let row = stitchTable.insertRow(-1)
-            row.insertCell(0).textContent = stitchTable.rows.length - 1
-            row.insertCell(1).textContent = 0
+        //ensure we have the correct number rows to show all our data
+        if (stitchTable.rows.length - 1 !== this.stitches.length) {
+            while (stitchTable.rows.length - 1 < this.stitches.length) {
+                let row = stitchTable.insertRow(-1)
+                row.insertCell(0).textContent = stitchTable.rows.length - 1
+                row.insertCell(1).textContent = 0
+            }
+            while (stitchTable.rows.length - 1 > this.stitches.length) {
+                //
+            }
         }
         //update every row to be equal to the array value
         this.stitches.forEach((stitches, index) => {
@@ -99,12 +104,6 @@ class Counter {
 
     shiftMods(value) {
         this.increment = mods[mods.indexOf(this.increment) + value] || this._increment
-    }
-    fixMods() {
-        console.log("mod no more")
-    }
-    syncTable(scroll = false) {
-        console.log("sync no more")
     }
     clearTable() {
         while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
