@@ -55,18 +55,10 @@ class Counter {
     get number() { return this.stitches[this.stitches.length - 1] }
     set number(value) {
         value = Math.max(0, value) //clamp values
-        //disable remove button if value is zero
-        removeButton.disabled = value == 0
-        //display the new value on screen
-        this.element.textContent = value
         //store the new value
         this.stitches[this.stitches.length - 1] = value
-        //store to localstorage
-        this.syncStorage()
-        //write the new value to the newest row
-        this.stitches[this.stitches.length - 1] = value
-        //update the table to show the value
-        this.syncTable()
+        //show the new value
+        this.sync(false)
     }
 
     get increment() { return this.counter.increment }
@@ -74,19 +66,26 @@ class Counter {
         //store the new value
         this.counter.increment = value
         //update the onscreen buttons
-        this.fixMods()
+        this.sync()
     }
 
-    shiftMods(value) {
-        this.increment = mods[mods.indexOf(this.increment) + value] || this._increment
-    }
-    fixMods() {
-        //enable all buttons
-        valMod.forEach((i) => elementArray[i].disabled = false)
-        //disable the button that corresponds to the increment
-        elementArray[valMod[this.increment]].disabled = true
-    }
-    syncTable(scroll = false) {
+    sync(mod = true, storage = true, scroll = false) {
+        if (storage) l.counters = JSON.stringify(this.counters)
+        
+        //disable remove button if value is zero
+        removeButton.disabled = this.number == 0
+        //display the new value on screen
+        this.element.textContent = this.number
+
+        //sync the mods
+        if (mod) {
+            //enable all buttons
+            valMod.forEach((i) => elementArray[i].disabled = false)
+            //disable the button that corresponds to the increment
+            elementArray[valMod[this.increment]].disabled = true
+        }
+
+        //sync the table
         //ensure we have enough rows to show all our data
         while (stitchTable.rows.length - 1 < this.stitches.length) {
             let row = stitchTable.insertRow(-1)
@@ -100,11 +99,20 @@ class Counter {
             if (scroll && index === this.stitches.length - 1) stitchTable.rows[index + 1].scrollIntoView()
         })
     }
+
+    shiftMods(value) {
+        this.increment = mods[mods.indexOf(this.increment) + value] || this._increment
+    }
+    fixMods() {
+        console.log("mod no more")
+    }
+    syncTable(scroll = false) {
+    }
     clearTable() {
         while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
     }
     syncStorage() {
-        l.counters = JSON.stringify(this.counters)
+        console.log("store no more!")
     }
     newRow() {
         this.stitches.push(0) //add element to the array
