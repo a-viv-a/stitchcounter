@@ -49,7 +49,7 @@ class Counter {
     set counter(value) { this.counters[this.index] = value }
 
     get stitches() { return this.counter.stitches }
-    set stitches(value) { this.counter.stitches = value }
+    set stitches(value) { this.counter.stitches = value; this.syncTable(); }
 
 
     get number() { return this.stitches[this.stitches.length - 1] }
@@ -151,9 +151,9 @@ class Counter {
 
 //get all the html elements, and init the counter object
 let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv"]
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv", "removeTab", "removeRow"]
         .forEach(id => elementArray.push(document.getElementById(id)))
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv] = elementArray,
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow] = elementArray,
     count = new Counter()
 
 //add all the event listeners
@@ -164,6 +164,11 @@ addEl(newRow, () => count.newRow())
 addEl(options, () => {
     optionsDiv.style.display = optionsDiv.style.display === "flex" ? "none" : "flex"
 })
+
+addEl(removeRow, () => {
+    console.log("remove row")
+})
+
 addEl(reset, () => count.reset())
 
 addEl(newTab, () => {
