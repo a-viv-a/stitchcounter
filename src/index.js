@@ -91,7 +91,7 @@ class Counter {
                 row.insertCell(1).textContent = 0
             }
             while (stitchTable.rows.length - 1 > this.stitches.length) {
-                //
+                stitchTable.deleteRow(stitchTable.rows.length - 1)
             }
         }
         //update every row to be equal to the array value
@@ -104,9 +104,6 @@ class Counter {
 
     shiftMods(value) {
         this.increment = mods[mods.indexOf(this.increment) + value] || this._increment
-    }
-    clearTable() {
-        while (stitchTable.rows.length > 1) stitchTable.deleteRow(1)
     }
     syncStorage() {
         console.log("store no more!")
@@ -123,7 +120,6 @@ class Counter {
         addEl(tab, () => {
             this.enableAllTabs()
             tab.disabled = true
-            this.clearTable()
             this.setCounter(name)
         })
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
