@@ -74,7 +74,6 @@ class Counter {
         //if value is zero, dont remove
         removeButton.disabled = this.number == 0
         //if there is only one tab, dont remove
-        console.log(this.tabs.length <= 1, this.tabs.length)
         removeTab.disabled = this.tabs.length <= 1
         //if there is only one row, dont remove it
         removeRow.disabled = this.stitches.length <= 1
@@ -111,7 +110,7 @@ class Counter {
     }
 
     shiftMods(value) {
-        this.increment = mods[mods.indexOf(this.increment) + value] || this._increment
+        this.increment = mods[mods.indexOf(this.increment) + value] || this.increment
     }
     syncStorage() {
         console.log("store no more!")
@@ -154,6 +153,7 @@ class Counter {
         this.index = 0
         this.counters = [{ name: "default", increment: 1, stitches: [0] }]
         this.tabs.forEach(tab => tab.remove())
+        this.tabs = [] //no need to delete the reference one at a time
         this.makeTab("default").click()
     }
 }
