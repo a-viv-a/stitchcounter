@@ -67,6 +67,7 @@ class Counter {
     }
 
     sync(mod = true, scroll = false) {
+        console.log("sync")
         //write to storage
         l.counters = JSON.stringify(this.counters)
 
@@ -175,7 +176,18 @@ addEl(options, () => {
 })
 
 addEl(removeRow, () => {
-    console.log("remove row")
+    count.stitches.pop()
+    /*
+    methods that operate on the actual array, in place, like pop dont
+    seem to trigger set function, so we need to call sync ourselves
+    */
+    count.sync(false)
+})
+
+addEl(removeTab, () => {
+    count.tabs[count.index].remove()
+    count.counters.splice(count.index, 1)
+    count.tabs[Math.max(count.index - 1, 0)].click()
 })
 
 addEl(reset, () => count.reset())
