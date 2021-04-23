@@ -24,7 +24,7 @@ class Counter {
         }
 
         //sync all this data to the display and the storage
-        this.sync(true, true, true)
+        this.sync(true, true)
 
         //make the tabs
         this.tabs = []
@@ -36,7 +36,7 @@ class Counter {
     set index(value) {
         this._index = value
         //if we don't sync storage we risk not storing new tab
-        this.sync(true, true, true)
+        this.sync(true, true)
     }
 
     get counters() { return this._counters }
@@ -66,8 +66,9 @@ class Counter {
         this.sync()
     }
 
-    sync(mod = true, storage = true, scroll = false) {
-        if (storage) l.counters = JSON.stringify(this.counters)
+    sync(mod = true, scroll = false) {
+        //write to storage
+        l.counters = JSON.stringify(this.counters)
 
         //disable remove button if value is zero
         removeButton.disabled = this.number == 0
@@ -110,7 +111,7 @@ class Counter {
     }
     newRow() {
         this.stitches.push(0) //add element to the array
-        this.sync(false, true, true) //sync it to the onscreen table, and scroll it into view
+        this.sync(false, true) //sync it to the onscreen table, and scroll it into view
         this.number = 0 //reset current row
     }
     makeTab(name) {
