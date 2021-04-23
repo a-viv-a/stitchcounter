@@ -186,8 +186,11 @@ addEl(removeRow, () => {
 
 addEl(removeTab, () => {
     count.tabs[count.index].remove()
+    count.tabs.splice(count.index, 1)
     count.counters.splice(count.index, 1)
-    count.tabs[Math.max(count.index - 1, 0)].click()
+    count._index = Math.max(count.index - 1, 0)
+    count.tabs[count.index].disabled = true
+    count.sync()
 })
 
 addEl(reset, () => count.reset())
