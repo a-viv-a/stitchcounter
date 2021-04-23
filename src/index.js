@@ -176,6 +176,7 @@ addEl(options, () => {
 })
 
 addEl(removeRow, () => {
+    if (!confirm(`the newest row in ${count.counter.name} will be removed.\nproceed?`)) return
     count.stitches.pop()
     /*
     methods that operate on the actual array, in place, like pop dont
@@ -185,6 +186,7 @@ addEl(removeRow, () => {
 })
 
 addEl(removeTab, () => {
+    if (!confirm(`all rows, stitches and other data in ${count.counter.name} will be cleared.\nproceed?`)) return
     count.tabs[count.index].remove()
     count.tabs.splice(count.index, 1)
     count.counters.splice(count.index, 1)
