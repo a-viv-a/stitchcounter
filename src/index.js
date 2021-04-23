@@ -35,7 +35,8 @@ class Counter {
     get index() { return this._index }
     set index(value) {
         this._index = value
-        this.sync(true, false, true)
+        //if we don't sync storage we risk not storing new tab
+        this.sync(true, true, true)
     }
 
     get counters() { return this._counters }
@@ -66,7 +67,6 @@ class Counter {
     }
 
     sync(mod = true, storage = true, scroll = false) {
-        console.log("sync!")
         if (storage) l.counters = JSON.stringify(this.counters)
 
         //disable remove button if value is zero
@@ -118,15 +118,14 @@ class Counter {
         tab.className = "tab"
         tab.textContent = name
         addEl(tab, () => {
-            this.enableAllTabs()
+            //enable all tabs
+            this.tabs.forEach(aTab => aTab.disabled = false)
             tab.disabled = true
+            //its faster on v8 to set one value twice then to compare for every value )=
             this.setCounter(name)
         })
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
         return tab
-    }
-    enableAllTabs() {
-        this.tabs.forEach(tab => tab.disabled = false)
     }
     setCounter(name) {
         this.counters.some(
