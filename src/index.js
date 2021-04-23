@@ -23,13 +23,13 @@ class Counter {
             console.log("old data migrated")
         }
 
-        //sync all this data to the display and the storage
-        this.sync(true, true)
-
         //make the tabs
         this.tabs = []
         this._counters.forEach(counter => this.makeTab(counter.name))
         this.tabs[0].disabled = true
+
+        //sync all this data to the display and the storage
+        this.sync(true, true)
     }
 
     get index() { return this._index }
@@ -70,8 +70,15 @@ class Counter {
         //write to storage
         l.counters = JSON.stringify(this.counters)
 
-        //disable remove button if value is zero
+        //disable buttons if they shouldnt be used
+        //if value is zero, dont remove
         removeButton.disabled = this.number == 0
+        //if there is only one tab, dont remove
+        console.log(this.tabs.length <= 1, this.tabs.length)
+        removeTab.disabled = this.tabs.length <= 1
+        //if there is only one row, dont remove it
+        removeRow.disabled = this.stitches.length <= 1
+
         //display the new value on screen
         this.element.textContent = this.number
 
@@ -144,6 +151,7 @@ class Counter {
         //clear localstorage data
         l.clear()
         //reset values to default
+        this.index = 0
         this.counters = [{ name: "default", increment: 1, stitches: [0] }]
         this.tabs.forEach(tab => tab.remove())
         this.makeTab("default").click()
