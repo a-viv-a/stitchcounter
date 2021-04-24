@@ -138,12 +138,11 @@ class Counter {
     deleteTab(index) {
         count.tabs[index].remove()
         count.tabs.splice(index, 1)
-        count.counters.splice(index, 1)
         if (count._index === index) {
             count._index = Math.max(index - 1, 0)
             count.tabs[count.index].disabled = true
+            count.sync(true, true, false)
         }
-        count.sync()
     }
     setCounter(name) {
         this.counters.some(
@@ -193,7 +192,7 @@ tabChannel.onmessage = ev => {
     switch (ev.data[0]) {
         case "r": count.visualTabReset(false); break
         case "m": count.makeTab(ev.data[1]); break
-        case "d": console.log("delete a tab")
+        case "d": count.deleteTab(ev.data[1])
     }
 }
 
@@ -219,6 +218,7 @@ addEl(removeRow, () => {
 addEl(removeTab, () => {
     if (!confirm(`all rows, stitches and other data in ${count.counter.name} will be cleared.\nproceed?`)) return
     let i = count.index
+    count.counters.splice(i, 1)
     count.deleteTab(count.index)
     tabChannel.postMessage(["d", i])
 
