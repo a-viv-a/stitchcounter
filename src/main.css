@@ -215,6 +215,7 @@ button.tab:disabled {
 }
 
 button.option {
+    padding: 1rem .5rem;
     flex-grow: 1;
 }
 
