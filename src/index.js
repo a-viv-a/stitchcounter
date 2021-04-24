@@ -135,6 +135,16 @@ class Counter {
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
         return tab
     }
+    deleteTab(index) {
+        count.tabs[index].remove()
+        count.tabs.splice(index, 1)
+        count.counters.splice(index, 1)
+        if (count._index === index) {
+            count._index = Math.max(index - 1, 0)
+            count.tabs[count.index].disabled = true
+        }
+        count.sync()
+    }
     setCounter(name) {
         this.counters.some(
             (counter, index) => {
@@ -145,11 +155,11 @@ class Counter {
             }
         )
     }
-    visualTabReset(click = true){
+    visualTabReset(click = true) {
         this.tabs.forEach(tab => tab.remove())
         this.tabs = [] //no need to delete the reference one at a time
         this.makeTab("default").disabled = true
-        if(click) this.tabs[0].click()
+        if (click) this.tabs[0].click()
     }
     reset() {
         //dont proceed if the popup is canceled
@@ -208,13 +218,10 @@ addEl(removeRow, () => {
 
 addEl(removeTab, () => {
     if (!confirm(`all rows, stitches and other data in ${count.counter.name} will be cleared.\nproceed?`)) return
-    count.tabs[count.index].remove()
-    count.tabs.splice(count.index, 1)
-    count.counters.splice(count.index, 1)
-    tabChannel.postMessage(["d", count.index])
-    count._index = Math.max(count.index - 1, 0)
-    count.tabs[count.index].disabled = true
-    count.sync()
+    let i = count.index
+    count.deleteTab(count.index)
+    tabChannel.postMessage(["d", i])
+
 })
 
 addEl(reset, () => count.reset())
