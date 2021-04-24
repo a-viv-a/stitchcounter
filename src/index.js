@@ -134,7 +134,7 @@ class Counter {
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
         return tab
     }
-    enableAllTabs(){
+    enableAllTabs() {
         //enable all tabs
         this.tabs.forEach(tab => tab.disabled = false)
     }
@@ -158,11 +158,12 @@ class Counter {
             }
         )
     }
-    visualTabReset(click = true) {
+    visualTabReset(source = true) {
         this.tabs.forEach(tab => tab.remove())
         this.tabs = [] //no need to delete the reference one at a time
         this.makeTab("default").disabled = true
-        if (click) this.tabs[0].click()
+        if (source) this.tabs[0].click()
+        else this._index = 0 //this updates the index on message based reset
     }
     reset() {
         //dont proceed if the popup is canceled
@@ -171,9 +172,9 @@ class Counter {
         l.clear()
         //reset values to default
         this.index = 0
+        tabChannel.postMessage(["r"])
         this.counters = [{ name: "default", increment: 1, stitches: [0] }]
         this.visualTabReset()
-        tabChannel.postMessage(["r"])
     }
 }
 
