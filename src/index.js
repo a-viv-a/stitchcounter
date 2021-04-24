@@ -158,12 +158,11 @@ class Counter {
             }
         )
     }
-    visualTabReset(source = true) {
+    visualTabReset() {
         this.tabs.forEach(tab => tab.remove())
         this.tabs = [] //no need to delete the reference one at a time
         this.makeTab("default").disabled = true
-        if (source) this.tabs[0].click()
-        else this._index = 0 //this updates the index on message based reset
+        this._index = 0
     }
     reset() {
         //dont proceed if the popup is canceled
@@ -171,10 +170,9 @@ class Counter {
         //clear localstorage data
         l.clear()
         //reset values to default
-        this.index = 0
         tabChannel.postMessage(["r"])
-        this.counters = [{ name: "default", increment: 1, stitches: [0] }]
         this.visualTabReset()
+        this.counters = [{ name: "default", increment: 1, stitches: [0] }]
     }
 }
 
@@ -195,7 +193,7 @@ sync.onmessage = ev => {
 tabChannel.onmessage = ev => {
     console.log("message with tab information!", ev.data)
     switch (ev.data[0]) {
-        case "r": count.visualTabReset(false); break
+        case "r": count.visualTabReset(); break
         case "m": count.makeTab(ev.data[1]); break
         case "d": count.deleteTab(ev.data[1])
     }
