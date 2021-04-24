@@ -2,7 +2,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js")
 //make localstorage access take less charecters
 const l = localStorage
 //make or join the broadcast channel so pages can stay synced
-const bc = new BroadcastChannel("sync")
+const sync = new BroadcastChannel("sync"), tabChannel = new BroadcastChannel("tab")
 //function to add event listener to element
 //this function will be made into single char by terser
 const addEl = (element, fn, ev = "click") => {
@@ -72,7 +72,7 @@ class Counter {
         //write to storage
         l.counters = JSON.stringify(this.counters)
         //alert any other tabs to update their data
-        if (post) bc.postMessage(this.counters)
+        if (post) sync.postMessage(this.counters)
 
         //disable buttons if they shouldnt be used
         //if value is zero, dont remove
@@ -145,6 +145,12 @@ class Counter {
             }
         )
     }
+    visualTabReset(click = true){
+        this.tabs.forEach(tab => tab.remove())
+        this.tabs = [] //no need to delete the reference one at a time
+        this.makeTab("default").disabled = true
+        if(click) this.tabs[0].click()
+    }
     reset() {
         //dont proceed if the popup is canceled
         if (!confirm("all rows, stitches and other data in all counters will be cleared.\nproceed?")) return
@@ -153,9 +159,8 @@ class Counter {
         //reset values to default
         this.index = 0
         this.counters = [{ name: "default", increment: 1, stitches: [0] }]
-        this.tabs.forEach(tab => tab.remove())
-        this.tabs = [] //no need to delete the reference one at a time
-        this.makeTab("default").click()
+        this.visualTabReset()
+        tabChannel.postMessage(["r"])
     }
 }
 
@@ -167,10 +172,19 @@ let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, st
     count = new Counter()
 
 //listen for sync events and sync them
-bc.onmessage = ev => {
+sync.onmessage = ev => {
     console.log("message with data to sync!")
     count._counters = ev.data
     count.sync(true, false, false)
+}
+
+tabChannel.onmessage = ev => {
+    console.log("message with tab information!", ev.data)
+    switch (ev.data[0]) {
+        case "r": count.visualTabReset(false); break
+        case "m": count.makeTab(ev.data[1]); break
+        case "d": console.log("delete a tab")
+    }
 }
 
 //add all the event listeners
@@ -197,6 +211,7 @@ addEl(removeTab, () => {
     count.tabs[count.index].remove()
     count.tabs.splice(count.index, 1)
     count.counters.splice(count.index, 1)
+    tabChannel.postMessage(["d", count.index])
     count._index = Math.max(count.index - 1, 0)
     count.tabs[count.index].disabled = true
     count.sync()
@@ -217,6 +232,7 @@ addEl(newTab, () => {
     }
     count.counters.push({ name: name, increment: 1, stitches: [0] })
     count.makeTab(name).click()
+    tabChannel.postMessage(["m", name])
 })
 
 for (let i = 2; i <= 5; i++) { //add the listeners for mod buttons programatically using element array
