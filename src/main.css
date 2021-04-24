@@ -45,6 +45,10 @@ html {
     flex-grow: 0;
 }
 
+#titleBlock {
+    flex-basis: 8.23vmin;
+}
+
 #count {
     background-color: rgb(102, 51, 153);
     justify-content: center;
