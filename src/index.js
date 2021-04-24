@@ -7,8 +7,6 @@ const addEl = (element, fn, ev = "click") => {
 }
 class Counter {
     constructor() {
-        this.element = document.getElementById("countNumber")
-
         //get the counters array or make it
         this._counters = JSON.parse(l.counters || '[{"name":"default","increment":1,"stitches":[0]}]')
         this._index = 0
@@ -80,7 +78,7 @@ class Counter {
         removeRow.disabled = this.stitches.length <= 1
 
         //display the new value on screen
-        this.element.textContent = this.number
+        countNumber.textContent = this.number
 
         //sync the mods
         if (mod) {
@@ -112,9 +110,6 @@ class Counter {
 
     shiftMods(value) {
         this.increment = mods[mods.indexOf(this.increment) + value] || this.increment
-    }
-    syncStorage() {
-        console.log("store no more!")
     }
     newRow() {
         this.stitches.push(0) //add element to the array
@@ -161,9 +156,9 @@ class Counter {
 
 //get all the html elements, and init the counter object
 let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv", "removeTab", "removeRow"]
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv", "removeTab", "removeRow", "countNumber"]
         .forEach(id => elementArray.push(document.getElementById(id)))
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow] = elementArray,
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow, countNumber] = elementArray,
     count = new Counter()
 
 //add all the event listeners
