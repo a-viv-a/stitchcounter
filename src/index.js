@@ -123,7 +123,7 @@ class Counter {
     }
     makeTab(name) {
         let tab = document.createElement("button")
-        tab.className = "tab"
+        tab.className = "tab noselect"
         tab.textContent = name
         addEl(tab, () => {
             //enable all tabs
