@@ -126,8 +126,7 @@ class Counter {
         tab.className = "tab noselect"
         tab.textContent = name
         addEl(tab, () => {
-            //enable all tabs
-            this.tabs.forEach(aTab => aTab.disabled = false)
+            this.enableAllTabs()
             tab.disabled = true
             //its faster on v8 to set one value twice then to compare for every value )=
             this.setCounter(name)
@@ -135,11 +134,16 @@ class Counter {
         this.tabs.push(titleBlock.insertBefore(tab, newTab))
         return tab
     }
+    enableAllTabs(){
+        //enable all tabs
+        this.tabs.forEach(tab => tab.disabled = false)
+    }
     deleteTab(index) {
         count.tabs[index].remove()
         count.tabs.splice(index, 1)
-        if (count._index === index) {
-            count._index = Math.max(index - 1, 0)
+        if (count._index >= index) {
+            count._index = Math.max(count._index - 1, 0)
+            this.enableAllTabs()
             count.tabs[count.index].disabled = true
             count.sync(true, true, false)
         }
