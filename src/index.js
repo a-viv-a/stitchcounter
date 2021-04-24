@@ -1,5 +1,8 @@
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js")
+//make localstorage access take less charecters
 const l = localStorage
+//make or join the broadcast channel so pages can stay synced
+const bc = new BroadcastChannel("sync")
 //function to add event listener to element
 //this function will be made into single char by terser
 const addEl = (element, fn, ev = "click") => {
@@ -64,10 +67,12 @@ class Counter {
         this.sync()
     }
 
-    sync(mod = true, scroll = false) {
+    sync(mod = true, scroll = false, post = true) {
         console.log("sync")
         //write to storage
         l.counters = JSON.stringify(this.counters)
+        //alert any other tabs to update their data
+        if (post) bc.postMessage(this.counters)
 
         //disable buttons if they shouldnt be used
         //if value is zero, dont remove
@@ -160,6 +165,13 @@ let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
         .forEach(id => elementArray.push(document.getElementById(id)))
 let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow, countNumber] = elementArray,
     count = new Counter()
+
+//listen for sync events and sync them
+bc.onmessage = ev => {
+    console.log("message with data to sync!")
+    count._counters = ev.data
+    count.sync(true, false, false)
+}
 
 //add all the event listeners
 addEl(addButton, () => count.number += count.increment)
