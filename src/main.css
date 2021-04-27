@@ -67,7 +67,7 @@ html {
     color-scheme: dark;
     background-color: rgb(24, 26, 27);
     color: rgb(232, 230, 227);
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 3px solid rgb(102, 51, 102);
     width: 80%;
@@ -78,7 +78,6 @@ p {
     font-weight: 100;
     font-size: 26px;
     font-size: clamp(100%, 1rem + 2vw, 24px);
-    padding: 15px;
 }
 
 #count {
