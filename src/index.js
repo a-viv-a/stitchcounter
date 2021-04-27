@@ -1,13 +1,20 @@
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js")
+
 //make localstorage access take less charecters
 const l = localStorage
+
 //make or join the broadcast channel so pages can stay synced
 const sync = new BroadcastChannel("sync"), tabChannel = new BroadcastChannel("tab")
+
 //function to add event listener to element
 //this function will be made into single char by terser
 const addEl = (element, fn, ev = "click") => {
     element.addEventListener(ev, fn)
 }
+
+const version = "stitchcounter-v1.2.0"
+
+
 class Counter {
     constructor() {
         //get the counters array or make it
@@ -173,6 +180,8 @@ class Counter {
         tabChannel.postMessage(["r"])
         this.visualTabReset()
         this.counters = [{ name: "default", increment: 1, stitches: [0] }]
+        //no need to show the first user help
+        l.$version = version
     }
 }
 
@@ -205,6 +214,11 @@ addEl(removeButton, () => count.number -= count.increment)
 
 //method to toggle the flex/none state of target element
 const toggleFlex = element => element.style.display = element.style.display === "flex" ? "none" : "flex"
+
+if (l.$version !== version) {
+    toggleFlex(helpModal)
+    l.$version = version
+}
 
 addEl(newRow, () => count.newRow())
 addEl(options, () => toggleFlex(optionsDiv))
