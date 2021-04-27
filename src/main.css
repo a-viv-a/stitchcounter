@@ -27,10 +27,14 @@ html {
     flex-grow: 1;
 }
 
-#countBlock, #countButtons, #rowBlock, #count {
+#countBlock, #countButtons, #rowBlock, #count, div.center {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+}
+
+div.center {
+    flex-grow: 0;
 }
 
 #rowBlock {
@@ -120,6 +124,19 @@ button:focus {
 
 button:active {
     transition: color .5s cubic-bezier(.04, 1.11, .09, .91), background-color .5s cubic-bezier(.04, 1.11, .09, .91);
+}
+
+button.purple {
+    color: rgb(232, 230, 227);
+    background-color: rgb(51, 26, 51);
+}
+
+button.purple:hover:enabled {
+    background-color: rgb(67, 35, 67);
+}
+
+button.purple:active:enabled {
+    background-color: rgb(100, 53, 100);
 }
 
 button.green {
