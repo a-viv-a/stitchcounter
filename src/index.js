@@ -181,7 +181,7 @@ class Counter {
         this.visualTabReset()
         this.counters = [{ name: "default", increment: 1, stitches: [0] }]
         //no need to show the first user help
-        l.$version = version
+        l.lversion = version
     }
 }
 
@@ -215,9 +215,9 @@ addEl(removeButton, () => count.number -= count.increment)
 //method to toggle the flex/none state of target element
 const toggleFlex = element => element.style.display = element.style.display === "flex" ? "none" : "flex"
 
-if (l.$version !== version) {
+if (l.lversion !== version) {
     toggleFlex(helpModal)
-    l.$version = version
+    l.lversion = version
 }
 
 addEl(newRow, () => count.newRow())
