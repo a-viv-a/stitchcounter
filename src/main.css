@@ -54,7 +54,7 @@ div.center {
 }
 
 .modal {
-    display: flex;
+    display: none;
     flex-direction: column;
     position: fixed;
     z-index: 10;

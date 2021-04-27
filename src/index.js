@@ -178,9 +178,9 @@ class Counter {
 
 //get all the html elements, and init the counter object
 let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv", "removeTab", "removeRow", "countNumber"]
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv", "removeTab", "removeRow", "countNumber", "help", "settings", "helpModal", "closeHelp"]
         .forEach(id => elementArray.push(document.getElementById(id)))
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow, countNumber] = elementArray,
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow, countNumber, help, settings, helpModal, closeHelp] = elementArray,
     count = new Counter()
 
 //listen for sync events and sync them
@@ -203,10 +203,13 @@ tabChannel.onmessage = ev => {
 addEl(addButton, () => count.number += count.increment)
 addEl(removeButton, () => count.number -= count.increment)
 
+//method to toggle the flex/none state of target element
+const toggleFlex = element => element.style.display = element.style.display === "flex" ? "none" : "flex"
+
 addEl(newRow, () => count.newRow())
-addEl(options, () => {
-    optionsDiv.style.display = optionsDiv.style.display === "flex" ? "none" : "flex"
-})
+addEl(options, () => toggleFlex(optionsDiv))
+addEl(help, () => toggleFlex(helpModal))
+addEl(closeHelp, () => toggleFlex(helpModal))
 
 addEl(removeRow, () => {
     if (!confirm(`the newest row in ${count.counter.name} will be removed.\nproceed?`)) return
