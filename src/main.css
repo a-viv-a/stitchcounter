@@ -37,6 +37,10 @@ div.center {
     flex-grow: 0;
 }
 
+div.purpleTop {
+    border-top: 3px solid rgb(102, 51, 102);
+}
+
 #rowBlock {
     background-color: rgb(51, 0, 51)
 }
@@ -101,10 +105,6 @@ dt {
 dd {
     margin-bottom: .1em;
     display: list-item;
-}
-
-#helpBottom {
-    border-top: 3px solid rgb(102, 51, 102);
 }
 
 #count {
