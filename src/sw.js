@@ -1,6 +1,6 @@
-const cacheName = "stitchcounter-v1.2.1", //semvar.org
+const cacheName = "stitchcounter-v1.2.2", //semvar.org
     contentToCache = [
-        "index.html",
+        "/",
         "index.js",
         "main.css",
         "manifest.json",
