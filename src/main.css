@@ -84,7 +84,7 @@ div.modal-content {
 }
 
 div.modal-text {
-    padding: 20px;
+    padding: 2vmin;
     overflow-y: auto;
 }
 
@@ -93,6 +93,10 @@ p, dl {
     font-size: 26px;
     font-size: clamp(100%, 1rem + 2vw, 24px);
     line-height: 1.6;
+}
+
+p {
+    margin: 1.5vmin 0vmin;
 }
 
 dt {
