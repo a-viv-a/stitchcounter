@@ -22,7 +22,7 @@ const addEl = (element, fn, ev = "click") => {
     element.addEventListener(ev, fn)
 }
 
-const version = "stitchcounter-v1.2.1"
+const version = "stitchcounter-v1.2.2"
 
 
 class Counter {
