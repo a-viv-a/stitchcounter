@@ -94,10 +94,13 @@ p, dl {
 dt {
     font-weight: 600;
     margin: .3em 0 0 .2em;
+    background-color: rgb(51, 26, 51);
+    padding: .1em .3em;
 }
 
 dd {
     margin-bottom: .1em;
+    display: list-item;
 }
 
 #count {
