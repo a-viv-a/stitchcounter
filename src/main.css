@@ -78,10 +78,19 @@ div.center {
     overflow: auto;
 }
 
-p {
+p, dl {
     font-weight: 100;
     font-size: 26px;
     font-size: clamp(100%, 1rem + 2vw, 24px);
+}
+
+dt {
+    font-weight: 600;
+    margin: .3em 0 0 .2em;
+}
+
+dd {
+    margin-bottom: .1em;
 }
 
 #count {
