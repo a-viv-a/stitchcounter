@@ -215,17 +215,24 @@ addEl(removeButton, () => count.number -= count.increment)
 //method to toggle the flex/none state of target element
 const toggleFlex = element => element.style.display = element.style.display === "flex" ? "none" : "flex"
 
+//method to toggle one element on the click of another
+const toggleFlexOnClick = (button, element) => addEl(button, () => toggleFlex(element))
+
+//show the help screen if it's users first visit / just updated
 if (l.lversion !== version) {
     toggleFlex(helpModal)
     l.lversion = version
 }
 
 addEl(newRow, () => count.newRow())
-addEl(options, () => toggleFlex(optionsDiv))
-addEl(settings, () => toggleFlex(settingsModal))
-addEl(closeSettings, () => toggleFlex(settingsModal))
-addEl(help, () => toggleFlex(helpModal))
-addEl(closeHelp, () => toggleFlex(helpModal))
+
+toggleFlexOnClick(options, optionsDiv)
+
+toggleFlexOnClick(settings, settingsModal)
+toggleFlexOnClick(closeSettings, settingsModal)
+
+toggleFlexOnClick(help, helpModal)
+toggleFlexOnClick(closeHelp, helpModal)
 
 addEl(helpModal, e => {
     if (e.target === helpModal) toggleFlex(helpModal)
