@@ -236,10 +236,10 @@ toggleFlexOnClick(closeHelp, helpModal)
 
 addEl(helpModal, e => {
     if (e.target === helpModal) toggleFlex(helpModal)
-})
+}, "mousedown")
 addEl(settingsModal, e => {
     if (e.target === settingsModal) toggleFlex(settingsModal)
-})
+}, "mousedown")
 
 addEl(removeRow, () => {
     if (!confirm(`the newest row in ${count.counter.name} will be removed.\nproceed?`)) return
