@@ -225,6 +225,10 @@ addEl(options, () => toggleFlex(optionsDiv))
 addEl(help, () => toggleFlex(helpModal))
 addEl(closeHelp, () => toggleFlex(helpModal))
 
+addEl(helpModal, e => {
+    if (e.target === helpModal) toggleFlex(helpModal)
+})
+
 addEl(removeRow, () => {
     if (!confirm(`the newest row in ${count.counter.name} will be removed.\nproceed?`)) return
     count.stitches.pop()
