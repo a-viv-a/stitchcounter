@@ -103,6 +103,10 @@ dd {
     display: list-item;
 }
 
+#helpBottom {
+    border-top: 3px solid rgb(102, 51, 102);
+}
+
 #count {
     background-color: rgb(102, 51, 153);
     justify-content: center;
