@@ -5,7 +5,8 @@ const cacheName = "stitchcounter-v1.2.0", //semvar.org
         "main.css",
         "manifest.json",
         "fonts/lexend-v2-stripped-regular.woff2",
-        "icons/favicon-128.png",
+        "icons/favicon-32.png",
+        "icons/favicon-svg.svg"
     ]
 self.addEventListener("install", e => {
     e.waitUntil((async () => {
