@@ -187,9 +187,9 @@ class Counter {
 
 //get all the html elements, and init the counter object
 let elementArray = [], valMod = [, 2, , 3, , 4, , , , , 5], mods = [1, 3, 5, 10]
-    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv", "removeTab", "removeRow", "countNumber", "help", "settings", "helpModal", "closeHelp"]
+    ;["addButton", "removeButton", "mod1", "mod3", "mod5", "mod10", "mainBlock", "countBlock", "stitchTable", "newRow", "reset", "titleBlock", "newTab", "options", "optionsDiv", "removeTab", "removeRow", "countNumber", "help", "toggleTab", "helpModal", "closeHelp"]
         .forEach(id => elementArray.push(document.getElementById(id)))
-let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow, countNumber, help, settings, helpModal, closeHelp] = elementArray,
+let [addButton, removeButton, mod1, mod3, mod5, mod10, mainBlock, countBlock, stitchTable, newRow, reset, titleBlock, newTab, options, optionsDiv, removeTab, removeRow, countNumber, help, toggleTab, helpModal, closeHelp] = elementArray,
     count = new Counter()
 
 //listen for sync events and sync them
@@ -227,6 +227,9 @@ if (l.lversion !== version) {
 addEl(newRow, () => count.newRow())
 
 toggleFlexOnClick(options, optionsDiv)
+
+titleBlock.style.display = "flex" //adds the style to the html so we can see its state
+toggleFlexOnClick(toggleTab, titleBlock)
 
 toggleFlexOnClick(help, helpModal)
 toggleFlexOnClick(closeHelp, helpModal)
