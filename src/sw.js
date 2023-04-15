@@ -33,9 +33,9 @@ self.addEventListener("activate", (e) => {
   e.waitUntil(
     (async () => {
       let keyList = await caches.keys();
-      Promise.all(
+      await Promise.all(
         keyList.map((key) => {
-          if (key !== cacheName) caches.delete(key);
+          if (key !== cacheName) return caches.delete(key);
         })
       );
     })()
